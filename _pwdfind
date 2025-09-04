@@ -57,8 +57,9 @@ else
 fi
 
 echo
-echo "----- ENTRY INFO -----"
+echo "----- ENTRY INFO START -----"
 kxc show --show-protected "$DB" "$entry"
+echo "------ ENTRY INFO END ------"
 
 echo
 echo "Copying username to clipboard (UserName)..."
