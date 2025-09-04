@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+echo -n "Enter your password: "
+read -s KP_DB_PASS
+export KP_DB_PASS
+echo "\nPassword stored in environment variable 'KP_DB_PASS' for this session."
+
