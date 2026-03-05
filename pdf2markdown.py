@@ -10,12 +10,12 @@ from pdf2image import convert_from_path
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_VERSION = "2023-06-01"
-MODEL = "claude-sonnet-4-5"
+MODEL = "claude-haiku-4-5"
 MAX_TOKENS = 4096
 
 # Image format: PNG is best for slides (lossless, good for text/diagrams)
 IMAGE_FORMAT = "PNG"
-IMAGE_DPI = 300  # High DPI for better text recognition
+IMAGE_DPI = 80  # High DPI for better text recognition
 
 
 def pdf_to_images(pdf_path, output_dir=None):
