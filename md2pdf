@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Check if parameter is provided
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <markdown-file>"
+  exit 1
+fi
+
+# Remove .md extension if provided
+filename=$(basename "$1" .md)
+
+inputFile="${filename}.md"
+outputFile="${filename}.pdf"
+
+mainfont="TeX Gyre Pagella"
+monofont="TeX Gyre Cursor" # DejaVu Sans Mono
+
+# Check if the markdown file exists
+if [ ! -f "$inputFile" ]; then
+  echo "Error: '$inputFile' not found."
+  exit 1
+fi
+
+tmpfile=$(mktemp)
+sed -e 's/\\( /$/g' -e 's/\\(/$/g' -e 's/ \\)/$/g' -e 's/\\)/$/g' -e 's/\\\[/$$/g' -e 's/\\\]/$$/g' "$inputFile" > "$tmpfile"
+
+# Convert the Markdown file to PDF using pandoc and xelatex
+pandoc -s -f markdown+hard_line_breaks "$tmpfile" \
+  -V geometry:"top=1in,bottom=1in,left=1in,right=1in" \
+  -V mainfont="$mainfont" -V monofont="$monofont" \
+  -V linestretch=1.2 \
+  --wrap=preserve \
+  --pdf-engine=xelatex --highlight-style=tango \
+  -o "$outputFile"
+
+rm "$tmpfile"
+
+# If conversion succeeds, open the PDF
+if [ $? -eq 0 ]; then
+  # For macOS and Mint use "open". For Linux, you might use "xdg-open" instead.
+  open "$outputFile"&
+else
+  echo "Conversion failed."
+  exit 1
+fi
+
