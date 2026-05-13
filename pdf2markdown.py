@@ -15,7 +15,7 @@ MAX_TOKENS = 4096
 
 # Image format: PNG is best for slides (lossless, good for text/diagrams)
 IMAGE_FORMAT = "PNG"
-IMAGE_DPI = 80  # High DPI for better text recognition
+IMAGE_DPI = 140  # High DPI for better text recognition
 
 
 def pdf_to_images(pdf_path, output_dir=None):
